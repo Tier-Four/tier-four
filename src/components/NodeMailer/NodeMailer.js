@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NavBar from '../NavBar/NavBar';
 import axios from 'axios';
+import Button from '@material-ui/core/Button';
 
 class NodeMailer extends Component {
 
@@ -15,6 +16,7 @@ class NodeMailer extends Component {
                 <NavBar />
                 <h1>Testing nodeMailer</h1>
                 <button onClick={this.triggerNodeMailer}>Trigger Node Mailer</button>
+                <Button href="/admin">go to admin</Button>
             </main>
         )
     }

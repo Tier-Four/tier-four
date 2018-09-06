@@ -3,8 +3,6 @@ const nodemailer = require('nodemailer');
 const router = express.Router();
 
 router.post('/', (req, res) => {
-    const output = `<p>hello world</p>`;
-
     // let transporter = nodemailer.createTransport({
     //     host: 'mail.gmail.com',
     //     port: 587,
@@ -34,7 +32,10 @@ router.post('/', (req, res) => {
     const mailList = [
         'leex4920@gmail.com',
         'maiy.lee22@gmail.com'
-    ]
+    ];
+    
+    const output = `<p>hello world</p>`;
+
     // setup email data with unicode symbols
     let mailOptions = {
         from: '"Tier Four Development Team" <prime.tierfour@gmail.com>', // sender address
