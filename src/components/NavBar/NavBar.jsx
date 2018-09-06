@@ -14,6 +14,9 @@ class NavBar extends Component {
         <Link to="/admin">
           Admin
           </Link>
+          <Link to="/test">
+          Test
+          </Link>
       </div>
     )
   }

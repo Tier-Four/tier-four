@@ -11,7 +11,7 @@ import RegisterPage from './components/RegisterPage/RegisterPage';
 import HomeView from './components/HomeView/HomeView';
 import DashboardView from './components/DashboardView/DashboardView';
 import AdminView from './components/AdminView/AdminView';
-
+import TestComponent from './components/TestComponent/TestComponent.js';
 import './styles/main.css';
 
 const App = () => (
@@ -38,6 +38,10 @@ const App = () => (
         <Route
           path="/dashboard"
           component={DashboardView}
+        />
+        <Route
+          path="/test"
+          component={TestComponent}
         />
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />
