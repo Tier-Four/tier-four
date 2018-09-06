@@ -1,7 +1,6 @@
 
 const express = require('express');
 require('dotenv').config();
-let nodemailer = require('nodemailer');
 
 const app = express();
 const bodyParser = require('body-parser');
@@ -10,10 +9,11 @@ const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/user.strategy');
 
 // nodeMailer transporter 
-const transporter = nodemailer.createTransport(transport[, defaults]);
+// const transporter = nodemailer.createTransport();
 
 // Route includes
 const userRouter = require('./routes/user.router');
+const nodeMailerRouter = require('./routes/nodemailer.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -28,6 +28,7 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
+app.use('/send', nodeMailerRouter);
 
 // Serve static files
 app.use(express.static('build'));

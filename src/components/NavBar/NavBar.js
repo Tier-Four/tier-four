@@ -12,6 +12,10 @@ const NavBar = () => (
           <Link to="/admin">
             Admin
           </Link>
+          <br />
+          <Link to="/nodemailer">
+            nodeMailer
+          </Link>
   </div>
 );
 
