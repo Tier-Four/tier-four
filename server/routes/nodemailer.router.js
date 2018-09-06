@@ -20,16 +20,25 @@ router.post('/', (req, res) => {
 
     let transporter = nodemailer.createTransport({
         service: 'gmail',
+        port: 465,
+        secure: true,
         auth: {
             user: 'prime.tierfour@gmail.com',
             pass: 'jefftylermattmaiyer'
-        }
+        },
+            tls:{ // because from local host, works without too
+              rejectUnauthorized:false
+            }
     });
 
+    const mailList = [
+        'leex4920@gmail.com',
+        'maiy.lee22@gmail.com'
+    ]
     // setup email data with unicode symbols
     let mailOptions = {
         from: '"Tier Four Development Team" <prime.tierfour@gmail.com>', // sender address
-        to: 'leex4920@gmail.com', // list of receivers
+        to: mailList, // list of receivers
         subject: 'Testing nodeMailer', // Subject line
         text: 'Hello world?', // plain text body
         html: output // html body
@@ -41,10 +50,10 @@ router.post('/', (req, res) => {
             return console.log(error);
         }
         console.log('Message sent: %s', info.messageId);
+        console.log('info rawL ', info);
         console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
         res.render('contact', { msg: 'Email has been sent' });
     });
-
-}); // end of router.post
+});
 
 module.exports = router;
