@@ -3,7 +3,6 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const rp = require('request-promise')
 
-
 let userList = []
 let today = new Date(); // today's date
 let startDate = new Date().setDate(today.getDate()-30); // 30 days from today's date
@@ -13,9 +12,6 @@ console.log('date is : ', date);
 date = JSON.stringify(date); // turns date into something .substring can handle 
 let actualDate = date.substring(1,11);
 console.log('this is the actual date: ', actualDate);
-
-
-
 
 router.get('/get-gh-data', (req, res)=>{
     console.log('getting gh data');
@@ -31,7 +27,7 @@ router.get('/get-gh-data', (req, res)=>{
     })
     Promise.all(requestPromises)
     .then((data)=>{
-        res.send(data)
+        res.send(data);
     })
     .catch((error)=>{
         res.sendStatus(500);
