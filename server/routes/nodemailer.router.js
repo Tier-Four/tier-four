@@ -1,7 +1,12 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const router = express.Router();
+const nodeCron = require('node-cron');
 
+let task = nodeCron.schedule('1 * * * * *', function () {
+    console.log('RAWRRRR!!!!!!');
+}, false);
+// task.start();
 router.post('/', (req, res) => {
     // let transporter = nodemailer.createTransport({
     //     host: 'mail.gmail.com',
@@ -16,6 +21,7 @@ router.post('/', (req, res) => {
     //     }
     //   });
 
+
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         port: 465,
@@ -24,16 +30,15 @@ router.post('/', (req, res) => {
             user: 'prime.tierfour@gmail.com',
             pass: 'jefftylermattmaiyer'
         },
-            tls:{ // because from local host, works without too
-              rejectUnauthorized:false
-            }
+        tls: { // because from local host, works without too
+            rejectUnauthorized: false
+        }
     });
 
     const mailList = [
-        'leex4920@gmail.com',
-        'maiy.lee22@gmail.com'
+        'leex4920@gmail.com'
     ];
-    
+
     const output = `<p>hello world</p>`;
 
     // setup email data with unicode symbols
