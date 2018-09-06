@@ -6,19 +6,18 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import Header from './components/Header/Header';
 import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 import HomeView from './components/HomeView/HomeView';
 import DashboardView from './components/DashboardView/DashboardView';
-import AdminView from './components/AdminView/AdminView';
+import AdminView from './components/AdminView/AdminView.jsx';
 import NodeMailer from './components/NodeMailer/NodeMailer';
 
+import TestComponent from './components/TestComponent/TestComponent.js';
 import './styles/main.css';
 
 const App = () => (
   <div>
-    <Header title="Tier Four" />
     <Router>
       <Switch>
         <Redirect exact from="/" to="/home" />
@@ -45,10 +44,13 @@ const App = () => (
          <Route
           path="/nodemailer"
           component={NodeMailer}
+          />
+        <Route
+          path="/test"
+          component={TestComponent}
         />
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />
-
       </Switch>
     </Router>
   </div>

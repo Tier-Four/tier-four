@@ -5,8 +5,10 @@ const nodeCron = require('node-cron');
 
 let task = nodeCron.schedule('1 * * * * *', function () {
     console.log('RAWRRRR!!!!!!');
+    // trigger Tyler's end points here! 
 }, false);
-// task.start();
+task.start();
+
 router.post('/', (req, res) => {
     // let transporter = nodemailer.createTransport({
     //     host: 'mail.gmail.com',
@@ -20,7 +22,6 @@ router.post('/', (req, res) => {
     //       rejectUnauthorized:false
     //     }
     //   });
-
 
     let transporter = nodemailer.createTransport({
         service: 'gmail',
