@@ -1,28 +1,8 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const router = express.Router();
-const nodeCron = require('node-cron');
-
-let task = nodeCron.schedule('1 * * * * *', function () {
-    console.log('RAWRRRR!!!!!!');
-    // trigger Tyler's end points here! 
-}, false);
-task.start();
 
 router.post('/', (req, res) => {
-    // let transporter = nodemailer.createTransport({
-    //     host: 'mail.gmail.com',
-    //     port: 587,
-    //     secure: false, // true for 465, false for other ports
-    //     auth: {
-    //         user: 'prime.tierfour@gmail.com', // generated ethereal user
-    //         pass: 'jefftylermattmaiyer'  // generated ethereal password
-    //     },
-    //     tls:{ // because from local host 
-    //       rejectUnauthorized:false
-    //     }
-    //   });
-
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         port: 465,
@@ -31,7 +11,8 @@ router.post('/', (req, res) => {
             user: 'prime.tierfour@gmail.com',
             pass: 'jefftylermattmaiyer'
         },
-        tls: { // because from local host, works without too
+        // for handling request from local host 
+        tls: { 
             rejectUnauthorized: false
         }
     });
