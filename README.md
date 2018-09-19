@@ -4,17 +4,24 @@ The purpose of Tier 4 is to encourage and create structure for Prime graduates (
 
 ## Built With
 
-- Node                  - Express               - PostgreSQL
-- NodeMailer            - React                 - React-redux
-- Redux-saga            - Passport              - GitHub API
-- Material-UI           - Heroku
+- Node                  
+- Express               
+- PostgreSQL
+- NodeMailer            
+- React                 
+- React-redux
+- Redux-saga            
+- Passport              
+- GitHub API
+- Material-UI           
+- Heroku
 
 ## Prerequisites
 
 Before you get started, make sure you have the following software installed on your computer:
 
 - [Node.js](https://nodejs.org/en/)
-- [PostrgeSQL](https://www.postgresql.org/)
+- [PostgreSQL](https://www.postgresql.org/)
 - [Nodemon](https://nodemon.io/)
 
 ## Create database and table
@@ -36,7 +43,6 @@ High level list of items completed.
 - [x] Oauth using GitHub Strategy.
 - [x] User data from GitHub API gathered, stored, and displayed.
 - [x] Use of NodeMailer to send user summaries to Prime Digital Academy Staff
-- [x] _______________________
 
 ### Next Steps
 
@@ -44,7 +50,6 @@ Features that you would like to add at some point in the future.
 
 - [ ] Ability for users to share what they are working on
 - [ ] Added incentives for users
-- [ ] _______________________
 
 ## Deployment
 
