@@ -23,7 +23,6 @@ const cookie = new Cookie();
 const styles = {
     paper: {
         padding: 20,
-        // marginTop: 5,
         marginBottom: 10,
         height: 500,
         display: 'center',

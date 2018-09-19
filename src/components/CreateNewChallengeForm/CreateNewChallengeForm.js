@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Card from '@material-ui/core/Card';
+
 class CreateNewChallengeForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
             newChallenge: {
                 title: '',
-                date: new Date(),
-                exclude_weekends: false,
-                exclude_holidays: false
+                date: new Date()
             }
         }
     }
 
+    // saves user input as local state
     handleChangeFor = (propertyName) => (event) => {
         this.setState({
             newChallenge: {
@@ -23,17 +22,12 @@ class CreateNewChallengeForm extends Component {
         })
     }
 
-    handleChangeForExclusion = (propertyName) => (event) => {
-        this.setState({
-            newChallenge: {
-                ...this.state.newChallenge,
-                [propertyName]: event.target.check
-            }
-        })
-    }
-
+    // triggers a react-redux action to send saved data to the database
     handleNewChallengeSubmit = () => {
-        this.props.dispatch({type:'CREATE_NEW_CHALLENGE', payload: this.state.newChallenge});
+        this.props.dispatch({
+            type:'CREATE_NEW_CHALLENGE', 
+            payload: this.state.newChallenge
+        });
     }
 
     render() {
