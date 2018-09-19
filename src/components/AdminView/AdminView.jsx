@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PastChallenges from '../PastChallenges/PastChallenges';
 import CurrentChallenge from '../CurrentChallenge/CurrentChallenge';
+import Header from '../Header/Header';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { CHALLENGE_ACTIONS } from '../../redux/actions/challengeActions';
-import Header from '../Header/Header';
 import {Tabs, Tab, Paper} from '@material-ui/core';
 
-
-// CREATE BUTTON DISABLED WHEN THERE IS NO CURRENT CHALLENGE AND A CHALLENGE ALREADY CREATED FOR THE FUTURE
+// allow local state to get redux store data
 const mapStateToProps = state => ({
     user: state.user.user,
     login: state.login,
@@ -30,11 +29,14 @@ class AdminView extends Component {
     }
 
     componentDidUpdate() {
+        // checks if user is admin
         if (this.props.user === null || !this.props.user.admin) {
             this.props.history.push('/home');
         }
     }
 
+    // line 38 to line 62 toggle component state values to either true or false
+    // allowing view to display either current or past challenge data
     displayCurrentChallenge = () => {
         if (this.state.displayPastChallenges === true) {
             this.setState({
@@ -61,6 +63,7 @@ class AdminView extends Component {
         }
     }
 
+    // enable material-ui tab feature
     handleDisplayChange = (event, value) => {
         this.setState({
             value: value
@@ -69,7 +72,6 @@ class AdminView extends Component {
 
     render() {
         const { value, displayCurrentChallenge, displayPastChallenges } = this.state;
-        // check is user is admin: 
         let content = (
             <div>
                 <Paper>
@@ -85,7 +87,6 @@ class AdminView extends Component {
                         label="Past Challenges"
                         onClick={this.displayPastChallenges} />
                 </Tabs>
-                {/* <p>Welcome, {this.props.user.name}</p> */}
                 <div>
                     {displayPastChallenges && <PastChallenges />}
                 </div>

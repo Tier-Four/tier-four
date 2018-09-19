@@ -38,8 +38,21 @@ class CreateNewChallengeForm extends Component {
 
     render() {
         return (
-            <div style={{ display: 'flex', position: 'fixed', width: '100%', height: '100%', top: '0', left: '0', right: '0', bottom: '0', margin: 'auto', backgroundColor: 'rgba(0,0,0,0.5)' }}>
-                <div style={{ postion: 'absolute', width: '500px', height: '250px', margin: 'auto', backgroundColor: 'white' }}>
+            <div style={{ display: 'flex', 
+                    position: 'fixed', 
+                    width: '100%', 
+                    height: '100%', 
+                    top: '0', 
+                    left: '0', 
+                    right: '0', 
+                    bottom: '0', 
+                    margin: 'auto', 
+                    backgroundColor: 'rgba(0,0,0,0.5)' }}>
+                <div style={{ postion: 'absolute', 
+                    width: '500px', 
+                    height: '250px', 
+                    margin: 'auto', 
+                    backgroundColor: 'white' }}>
                     <form>
                         <p>{this.props.text}</p>
                         <label>Challenge Title</label>
@@ -56,23 +69,12 @@ class CreateNewChallengeForm extends Component {
                             type="date"
                             onChange={this.handleChangeFor('date')}
                         /><br />
-                        Exclude Weekends:
-                    <input
-                            // STRETCH
-                            // checkbox is not capturing true/false
-                            // MYL : fix this bug
-                            type="checkbox"
-                            // value={this.state.newChallenge.exclude_weekends}
-                            // onChange={this.handleChangeFor('exclude_weekends')}
-                        /><br />
-                        Exclude Holidays:
-                    <input
-                            type="checkbox"
-                            // value={this.state.newChallenge.exclude_holidays}
-                            // onChange={this.handleChangeFor('exclude_holidays')}
-                        /><br />
-                        <button onClick={this.handleNewChallengeSubmit}>Create Challenge</button><br />
-                        <button onClick={this.props.closePopupForm}>Cancel</button>
+                        <button 
+                            onClick={this.handleNewChallengeSubmit}>
+                            Create Challenge</button><br />
+                        <button 
+                            onClick={this.props.closePopupForm}>
+                            Cancel</button>
                     </form>
                 </div>
             </div>
