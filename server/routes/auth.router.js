@@ -90,9 +90,9 @@ router.get('/login', passport.authenticate('github', { failureRedirect: '/login'
   
 
 router.get('/github/callback', 
-  passport.authenticate('github', { failureRedirect: 'http://localhost:3000' }),
+  passport.authenticate('github', { failureRedirect: 'https://enigmatic-savannah-58789.herokuapp.com/#/home' }),
   function(req, res) {
-    res.redirect('http://localhost:3000');
+    res.redirect('https://enigmatic-savannah-58789.herokuapp.com/#/home');
   });
 
 router.get('/user', (req, res) => {
