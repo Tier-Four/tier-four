@@ -6,6 +6,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import swal from 'sweetalert';
 
 class DeleteCurrentChallengeButton extends Component {
+    
+    // user confirmation after delete button clicked
     handleDelete = () => {
         swal({
             title: 'Are you sure?',

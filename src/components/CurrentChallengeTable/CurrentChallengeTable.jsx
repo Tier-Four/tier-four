@@ -9,7 +9,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import DeleteIcon from '@material-ui/icons/Delete';
-import CurrentChallengeTableWithSort from '../CurrentChallengeTableWithSort/CurrentChallengeTableWithSort';
 import swal from 'sweetalert'
 
 const mapStateToProps = state => ({
@@ -27,6 +26,7 @@ class CurrentChallengeTable extends Component {
         this.props.dispatch({ type: CHALLENGE_ACTIONS.FETCH_USER_DATA_CURRENT_CHALLENGE });
     }
 
+    // confirmation on deleting individual user 
     handleDeleteUserFromCurrentChallenge = (userId, challengeId) => {
         swal({
             title: "Are you sure?",
@@ -52,6 +52,7 @@ class CurrentChallengeTable extends Component {
     }
 
     render() {
+        // maps through the reducer data of current challenges
         let apiChallengeResults = this.props.currentChallengeUserData.map(user => {
             return (
                 <TableRow key={user.id}>
