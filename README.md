@@ -2,6 +2,8 @@
 
 The purpose of Tier 4 is to encourage and create structure for Prime graduates (Users) during their career search. Administrative users (Admin) are able to create 30-day Github Challenge Sprints and view a table of participating graduates’ commit percentage and GitHub streak. Commit percentage is a measurement of user progress in the challenge. (For example, if a user has committed to GitHub everyday since the beginning of the competition, their commit percentage would be at 100%). GitHub streak is consecutive days of commit to GitHub not including weekends and holidays (depending on the challenge configuration). After registration, users can join challenges and see their streak and percentage of days with commits.
 
+https://enigmatic-savannah-58789.herokuapp.com/#/home
+
 ## Built With
 
 - Node                  
