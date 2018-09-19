@@ -6,6 +6,7 @@ import { LOGIN_ACTIONS } from '../../redux/actions/loginActions';
 
 import { Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import swal from 'sweetalert';
 
 
 const HomeLink = props => <Link to="/home" {...props} />
@@ -34,7 +35,6 @@ const styles = theme => ({
     }
 })
 
-
 class NewNav extends Component {
 
     componentWillMount() {
@@ -44,12 +44,21 @@ class NewNav extends Component {
     }
 
     logout = () => {
-        this.props.dispatch({ type: LOGIN_ACTIONS.LOGOUT })
+        swal({
+            title: "Are you sure you want to log out?",
+            buttons: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              this.props.dispatch({ type: LOGIN_ACTIONS.LOGOUT })
+            } else {
+            }
+          });
     }
 
+    //conditionally rendering login/logout buttons dependant on whether the user is logged in with GitHub
     logInLogOut = () => {
         let { classes } = this.props
-
         try {
             if (this.props.user.github) {
                 return (
@@ -63,6 +72,7 @@ class NewNav extends Component {
         }
     }
 
+    //conditionally rendering login/logout buttons dependant on whether the user is marked as admin in Database
     adminNav = () => {
         try {
             if (this.props.user.admin) {
@@ -80,6 +90,7 @@ class NewNav extends Component {
         }
     }
 
+    //displays user's name from github if logged in
     dashboardNav = () => {
         try {
             if (this.props.user.github && !this.props.user.admin) {
@@ -97,20 +108,14 @@ class NewNav extends Component {
     }
 
     render() {
-
         let { classes } = this.props
-
         return (
             <div className={classes.newNav}>
-                {/* <img src="https://dewiskbohv5c1.cloudfront.net/assets/logo-prime-horizontal-6909d23113b83bd59bf681f26f940f97.svg" alt="" height="40%" width="auto" className={classes.logo} />                               */}
                 <Button component={HomeLink} color="secondary">
                     Home
                 </Button>
                 {this.dashboardNav()}                
                 {this.adminNav()}
-                {/* <div className={classes.logout}>
-                {this.logInLogOut()}
-                </div> */}
             </div>
         )
     }

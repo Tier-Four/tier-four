@@ -20,6 +20,7 @@ class Countdown extends Component {
         return number < 10 ? '0' + number : number;
     }
 
+    
     getTimeUntil = (deadline) => {
         // calculated the amount of time before the deadline
         const time = Date.parse(deadline) - Date.parse(new Date());
