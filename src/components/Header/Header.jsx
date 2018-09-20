@@ -56,10 +56,10 @@ class Header extends Component {
                     <Button color="secondary" onClick={this.logout}>Log out</Button>
                 )
             } else {
-                return (<Button color="secondary" href="http://localhost:5000/api/auth/login">Log In</Button>);
+                return (<Button color="secondary" href="/api/auth/login">Log In</Button>);
             }
         } catch (error) {
-            return (<Button color="secondary" href="http://localhost:5000/api/auth/login">Log In</Button>);
+            return (<Button color="secondary" href="/api/auth/login">Log In</Button>);
         }
     }
 
@@ -104,11 +104,6 @@ class Header extends Component {
             <div className={classes.gradiant}>
                 <div className={classes.header}>
                     <img src="https://dewiskbohv5c1.cloudfront.net/assets/logo-prime-horizontal-6909d23113b83bd59bf681f26f940f97.svg" alt="" height="50%" width="auto" className={classes.logo} />
-                    {/* <Button component={HomeLink} color="secondary">
-                    Home
-                </Button>
-                {this.dashboardNav()}                
-                {this.adminNav()} */}
                     <div className={classes.logout}>
                         {this.logInLogOut()}
                     </div>
