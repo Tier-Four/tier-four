@@ -58,17 +58,16 @@ class NewNav extends Component {
 
     //conditionally rendering login/logout buttons dependant on whether the user is logged in with GitHub
     logInLogOut = () => {
-        let { classes } = this.props
         try {
             if (this.props.user.github) {
                 return (
                     <Button color="secondary" onClick={this.logout}>Log out</Button>
                 )
             } else {
-                return (<Button  color="secondary" href="http://localhost:5000/api/auth/login">Log In</Button>);
+                return (<Button  color="secondary" href="/api/auth/login">Log In</Button>);
             }
         } catch (error) {
-            return (<Button  color="secondary" href="http://localhost:5000/api/auth/login">Log In</Button>);
+            return (<Button  color="secondary" href="/api/auth/login">Log In</Button>);
         }
     }
 

@@ -1,4 +1,3 @@
-import { STATS_ACTIONS } from '../actions/dashboardActions';
 import { combineReducers } from 'redux';
 
 const emailSnackbar = (state = false, action) => {

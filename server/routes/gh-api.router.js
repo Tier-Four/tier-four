@@ -13,15 +13,9 @@ let challengeDate = '01-01-2018'
 let challengeID = 0;
 let challengeDateString = '01-01-2018'
 //define global variables that will be used within multiple functions.
-let theData;
 //test variable so that you can retrieve api data when you click the button in testComponent.js
 
 let didChallengeFinishRecently = false;
-// let currentDate = new Date();
-// currentDate = JSON.stringify(currentDate)
-// currentDate = currentDate.substring(1, 11)
-
-
 
 
 let date = new Date();
@@ -30,16 +24,14 @@ todaysDate = date.substring(1, 11)
 //calculate todays date so that we only get todays commits in getData()
 
 cron.schedule('0 0 0 * * *', function () {
-    console.log('running once every 10 min');
+    console.log('time to retrieve data...');
     getData();
 });
 //run getData() once every 20 seconds, will be changed to once a day at midnight.
-//getData();
 
 
 
 function getData() {
-    console.log('getting user list');
     pool.query(`SELECT "date", "id" FROM "challenges" WHERE "active" = 'true';`)
         .then((response) => { //retrieve the start date and id of the current active challenge, there should only be one.
             if (response.rows.length !== 0) { //only run the api calls if there is a current active challenge.
@@ -48,7 +40,7 @@ function getData() {
                 challengeDateString = JSON.stringify(challengeDate)
                 challengeDateString = challengeDateString.substring(1, 11)
 
-                let date1 = new Date(challengeDateString); //fix
+                let date1 = new Date(challengeDateString); 
                 let date2 = new Date(todaysDate);
                 let timeDiff = Math.abs(date2.getTime() - date1.getTime());
                 let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
@@ -85,14 +77,13 @@ function callApi(user) {
      //loop through the userlist we just got from postgres and generate an api call using each users information.
         const requestOptions = {
             uri: `https://api.github.com/search/commits?q=committer:${user.github}+committer-date:${todaysDate}&sort=committer-date&per_page=1`,
-            headers: { "User-Agent": user.github, Accept: 'application/vnd.github.cloak-preview+json', Authorization: 'token 23982af669baa75e29e52bbd5a45594c65b7f7b2' },
+            headers: { "User-Agent": user.github, Accept: 'application/vnd.github.cloak-preview+json', Authorization: 'GITHUB_API_AUTHORIZATION_TOKEN' },
             method: 'GET',
             json: true
         }
         requestPromises.push(rp(requestOptions)); //create a promise for each api request
     Promise.all(requestPromises)
     .then((data) => {
-        console.log(user.github, data);
         sortAndSendData(data, user)
         if (listOfUsers.length !== 0) {
             setTimeout(()=>callApi(listOfUsers.shift()), 2000)
@@ -101,7 +92,6 @@ function callApi(user) {
 }
 
 async function sortAndSendData(tempData, user) { //tempData is an array of the data(sorted by user) that we got from the api. its indexes correspond to the userList array. this is important.
-    console.log('sorting and sending this users data');
     let date = JSON.stringify(challengeDate)
     let currentDate = JSON.stringify(new Date())
     let date1 = new Date(date.substring(1, 11));
@@ -137,10 +127,8 @@ async function sortAndSendData(tempData, user) { //tempData is an array of the d
 function setActiveUser(calendar, userInfo, diffDays) {
     tempCalendar = calendar.slice(0, diffDays+1)
     tempCalendar = tempCalendar.reverse();
-    console.log(tempCalendar, userInfo.github);
 
     if (tempCalendar[0] === false && tempCalendar[1] === false && tempCalendar[2] === false && tempCalendar[3] === false && tempCalendar[4] === false) {
-        console.log(`setting ${userInfo.github} to inactive.`);
 
         pool.query(`UPDATE "users" SET "active" = false WHERE "id" = ${userInfo.user_id};`)
             .then((response) => {
@@ -165,7 +153,6 @@ function processData(userData, diffDays, username) {
         userCommitArray[diffDays] = true;         //if the user committed on the second day of the challenge, the second value in userCommitArray will be true, the rest will be false
     }
     else if (diffDays > 30) {
-        console.log('the current challenge should have ended or should end soon.');
     }
     return userCommitArray; //return the processed array.
 }
@@ -180,7 +167,6 @@ function packageData(username, data) {
 function getStreakAndPercent(data, diffDays) {
     let longestStreak = getStreak(data) //call the getStreak function by sending it the calendar we just created.
     let commitPercent = Math.round(getPercent(data, diffDays)) //^^ but commit %
-    //console.log(longestStreak, commitPercent);
     return {
         longestStreak,
         commitPercent
@@ -211,7 +197,6 @@ function getStreak(data) {
 
 function getPercent(data, diffDays) {
     let newData = data.slice(0, diffDays+1) //grabs a sub-array that only includes days of the challenge which have already passed.
-    //console.log('dataArray',newData );
     let commitCount = 0;
     for (let i = 0; i < newData.length; i++) {
         if (newData[i]) {

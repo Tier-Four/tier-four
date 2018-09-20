@@ -1,0 +1,1 @@
+{"version":3,"sources":["styles/main.css"],"names":[],"mappings":"AAAA,KACI,sDACA,gBACA,SACA,SAAY","file":"static/css/main.b82a1bb8.css","sourcesContent":["body {\n    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n    background: #222222;\n    margin: 0 0 0 0;\n    padding: 0%;\n}\n\n\n// WEBPACK FOOTER //\n// ./src/styles/main.css"],"sourceRoot":""}

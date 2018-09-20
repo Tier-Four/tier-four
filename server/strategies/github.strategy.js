@@ -12,38 +12,26 @@ passport.serializeUser(function(user, cb) {
     cb(null, obj);
   });
 
+//these are from the GitHub OAuth application
+const CLIENT_ID = '69f62cd5606f940c16e1';
+const CLIENT_SECRET = 'bfa6feba4bf473840752b9d1c49bf61cdd90d5e7';
 
-const CLIENT_ID = '1d14666b64e768538a8b';
-const CLIENT_SECRET = '9135def1c599d961cab8e9f6474796488f534b5e';
-
-// Configure the Twitter strategy for use by Passport.
-//
-// OAuth 1.0-based strategies require a `verify` function which receives the
-// credentials (`token` and `tokenSecret`) for accessing the Twitter API on the
-// user's behalf, along with the user's profile.  The function must invoke `cb`
-// with a user object, which will be set at `req.user` in route handlers after
-// authentication.
 
 passport.use( new Strategy({
     clientID: CLIENT_ID,
     clientSecret: CLIENT_SECRET,
-    callbackURL: 'http://localhost:5000/api/auth/github/callback'
+    callbackURL: 'https://tier4.herokuapp.com/api/auth/github/callback' //this is set-up in the OAuth App on GitHub
   },
   function(token, tokenSecret, profile, cb) {
-    // In this example, the user's Twitter profile is supplied as the user
-    // record.  In a production-quality application, the Twitter profile should
-    // be associated with a user record in the application's database, which
-    // allows for account linking and authentication with other identity
-    // providers.
+    //Do we have a user matching this in our Database?
     pool.query('SELECT * FROM users WHERE github = $1;', [profile.username]).then((result) => {
+        //if not, enter that user into the database
         if(result.rows.length === 0) {
-          //values from Facebook are inserted into database.
-          // NOTE user is instantiated with a status int 1 in the database. int 2 is admin access.
           pool.query('INSERT INTO users (name, github, image_url) VALUES ($1, $2, $3);',
                       [profile.displayName, profile.username, profile.photos[0].value])
             .then((result) => {
               if(debug){console.log('registered new user');};
-  
+              //then select that user from the database and then return that user
               pool.query('SELECT * FROM users WHERE github = $1;', [profile.username]).then((result) => {
                 if(result.rows.length === 0) {
                   cb(null, false);
@@ -60,7 +48,7 @@ passport.use( new Strategy({
               if(debug){console.log('error in new user post', err);};
               cb(null, false);
             })
-        } else {
+        } else { //if we DO have a user that matches this user, return that user
   
           let foundUser = result.rows[0];
           if(debug){console.log('found user', foundUser);};
@@ -71,11 +59,6 @@ passport.use( new Strategy({
         response.sendStatus(500);
         cb(null, false);
       })
-
-//check db for ex
-    console.log('Strategy', profile);
-    
-    // return cb(null, foundUser);
   }));
 
 module.exports = passport;
