@@ -9,7 +9,6 @@ const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/github.strategy');
 
 // Route includes
-
 const challengeRouter = require('./routes/challenge.router');
 const authRouter = require('./routes/auth.router.js');
 const dashboardRouter = require('./routes/dashboard.router');
