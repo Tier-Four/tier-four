@@ -77,7 +77,7 @@ function callApi(user) {
      //loop through the userlist we just got from postgres and generate an api call using each users information.
         const requestOptions = {
             uri: `https://api.github.com/search/commits?q=committer:${user.github}+committer-date:${todaysDate}&sort=committer-date&per_page=1`,
-            headers: { "User-Agent": user.github, Accept: 'application/vnd.github.cloak-preview+json', Authorization: 'token 23982af669baa75e29e52bbd5a45594c65b7f7b2' },
+            headers: { "User-Agent": user.github, Accept: 'application/vnd.github.cloak-preview+json', Authorization: 'GITHUB_API_AUTHORIZATION_TOKEN' },
             method: 'GET',
             json: true
         }

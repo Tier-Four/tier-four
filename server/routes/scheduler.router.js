@@ -21,8 +21,8 @@ let transporter = nodemailer.createTransport({
     port: 465,
     secure: true,
     auth: {
-        user: 'prime.tierfour@gmail.com',
-        pass: 'jefftylermattmaiyer'
+        user: 'NODEMAILER_EMAIL',
+        pass: 'NODEMAILER_PASSWORD'
     },
     // for handling request from local host 
     tls: {
@@ -49,7 +49,7 @@ function callApi(user) {
     const requestPromises = [] //creates an array of requests we are going to send to the api.
     const requestOptions = {
         uri: `https://api.github.com/search/commits?q=committer:${user.github}+committer-date:${currentDate}&sort=committer-date&per_page=1`,
-        headers: { "User-Agent": 'reverended', Accept: 'application/vnd.github.cloak-preview+json', Authorization: 'token  23982af669baa75e29e52bbd5a45594c65b7f7b2' },
+        headers: { "User-Agent": user.github, Accept: 'application/vnd.github.cloak-preview+json', Authorization: 'GITHUB_API_AUTHORIZATION_TOKEN' },
         method: 'GET',
         json: true
     }
@@ -163,7 +163,7 @@ function weeklyUpdates() {
             // setup email data with unicode symbols
             let mailOptions = {
                 from: 'Tier Four App', // sender address
-                to: 'eddywilkins34@gmail.com', // INSERT careers@primeacademy.io HERE
+                to: 'PRIME_STAFF_EMAIL', // INSERT careers@primeacademy.io HERE
                 subject: 'Weekly Alumni Feedback', // Subject line
                 text: '', // plain text body
                 html: output // html body
