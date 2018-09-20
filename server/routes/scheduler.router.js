@@ -61,7 +61,7 @@ function callApi(user) {
 
             if (data[0].total_count === 0) {
 
-                const output = `<p>hey, ${JSON.stringify(user)} just a friendly reminder to Commit and Push to Github everyday! There's a spot on the leaderboard with your name on it!</p>`;
+                const output = `<p>hey, ${user.github} just a friendly reminder to Commit and Push to Github everyday! There's a spot on the leaderboard with your name on it!</p>`;
 
                 // setup email data with unicode symbols
                 let mailOptions = {
@@ -123,8 +123,8 @@ function weeklyEmail() { //send weekly feedback email
             let mailOptions = {
                 from: 'Prime Tier 4 Staff', // sender address
                 to: mailList, // list of receivers
-                subject: 'message', // Subject line
-                text: 'Happy Birthday.....', // plain text body
+                subject: 'Feedback', // Subject line
+                text: '', // plain text body
                 html: output // html body
             }; //send email to all those on the mailList
 
@@ -149,9 +149,16 @@ function weeklyUpdates() {
             //send them to the mailList array
 
             //adjust email content
+            let output = '';
 
+            response.rows.forEach(user=>{
+                output += `<p>name: ${user.name} email: ${user.email} applied: ${user.applied} learned: ${user.learned} built: ${user.built} followed up: ${user.followed_up} networking: ${user.events_networking}     </p>`
+            })
 
-            const output = `<p>${JSON.stringify(response.rows)}</p>`; //temporary
+            
+            console.log('this is the output',output);
+            
+            // const output = `<p>${JSON.stringify(response.rows)}</p>`; //temporary
 
             // setup email data with unicode symbols
             let mailOptions = {
