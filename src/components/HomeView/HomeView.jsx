@@ -8,7 +8,7 @@ import { fetchStartDate, fetchLeaders } from '../../redux/actions/homeActions';
 import LOGIN_ACTIONS from '../../redux/actions/loginActions'
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 
-import { Typography, withStyles, Paper } from '@material-ui/core';
+import { Typography, withStyles} from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
@@ -98,7 +98,7 @@ class HomeView extends Component {
 
         if (this.props.leaders.length > 0) {
             leaderCards = this.sortLeaders().map((leader, index) => {
-                return (<div class={classes.cardContent}>
+                return (<div key={index} className={classes.cardContent}>
                     <Card>
                         <img src={leader.image_url} alt={leader.name} height="200px" width="auto" className={classes.userimage}/>
                         <CardContent>

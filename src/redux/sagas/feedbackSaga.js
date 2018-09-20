@@ -11,7 +11,6 @@ function* addFeedbackSaga() {
 }
 
 function* addFeedback(action){
-    console.log(action);
     try{
         yield call(axios.post, '/api/dashboard/feedback', action.payload)
         yield put({
