@@ -2,7 +2,7 @@
 
 The purpose of Tier 4 is to encourage and create structure for Prime graduates (Users) during their career search. Administrative users (Admin) are able to create 30-day Github Challenge Sprints and view a table of participating graduates’ commit percentage and GitHub streak. Commit percentage is a measurement of user progress in the challenge. (For example, if a user has committed to GitHub everyday since the beginning of the competition, their commit percentage would be at 100%). GitHub streak is consecutive days of commit to GitHub not including weekends and holidays (depending on the challenge configuration). After registration, users can join challenges and see their streak and percentage of days with commits.
 
-http://tier4.herokuapp.com/#/home
+[Tier 4] (http://tier4.herokuapp.com/#/home)
 
 ## Built With
 
@@ -30,21 +30,14 @@ Before you get started, make sure you have the following software installed on y
 
 Refer to database.sql to create database/table structure
 
-## Screen Shot
-
-Include one or two screen shots of your project here (optional). Remove if unused.
-
-## Documentation
-
-Link to a read-only version of your scope document or other relevant documentation here (optional). Remove if unused.
-
 ### Completed Features
 
 High level list of items completed.
 
 - [x] Oauth using GitHub Strategy.
-- [x] User data from GitHub API gathered, stored, and displayed.
+- [x] User data from GitHub API gathered, stored, and displayed daily.
 - [x] Use of NodeMailer to send user summaries to Prime Digital Academy Staff
+- [x] GitHub information stored and recalled from app Database
 
 ### Next Steps
 
@@ -55,12 +48,15 @@ Features that you would like to add at some point in the future.
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+1. Clone project down from GitHub
+2. NPM install
+3. Generate GitHub API Authorization token [Here](https://github.com/settings/tokens)
+4. 
 
 ## Authors
 
-Matt Beyl, Jeff Richardson, Mai Yer Lee, Tyler Sehr
+- [Matt Beyl](https://github.com/matthewbeyl)
+- [Mai Yer Lee](https://github.com/Roboronnie)
+- [Jeff Richardson](https://github.com/jjrich13)
+- [Tyler Sehr](https://github.com/ReverendEd)
 
-## Acknowledgments
-
-Shout out to Freddie Mercury
