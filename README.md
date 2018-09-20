@@ -20,7 +20,7 @@ The purpose of Tier 4 is to encourage and create structure for Prime graduates (
 
 ## Prerequisites
 
-Before you get started, make sure you have the following software installed on your computer:
+   Before you get started, make sure you have the following software installed on your computer:
 
 - [Node.js](https://nodejs.org/en/)
 - [PostgreSQL](https://www.postgresql.org/)
@@ -28,7 +28,7 @@ Before you get started, make sure you have the following software installed on y
 
 ## Create database and table
 
-Refer to database.sql to create database/table structure
+   Refer to database.sql to create database/table structure
 
 ### Completed Features
 
@@ -41,22 +41,24 @@ Refer to database.sql to create database/table structure
 
 - [ ] Ability for users to share what they are working on
 - [ ] Added incentives for users
+- [ ] Make application mobile friendly
 
 ## Deployment
 
 1. Clone/download Repository
 2. NPM install
-3. Create .env file with SERVER_SESSION_SECRET=
-* SERVER_SESSION_SECRET can be generated [Here](https://passwordsgenerator.net/)
+3. Create .env file with SERVER_SESSION_SECRET
+    
+   SERVER_SESSION_SECRET can be generated [Here](https://passwordsgenerator.net/)
 4. Make changes to the following files:
-challenge.router.js
+#### challenge.router.js
 * NODEMAILER_EMAIL NODEMAILER_PASSWORD should be changed to Gmail username and password of account you would like to use for application.
-gh-api.router.js
+#### gh-api.router.js
 * GITHUB_API_AUTHORIZATION_TOKEN must be changed. Generate GitHub API Authorization token [Here](https://github.com/settings/tokens)
-scheduler.router.js
+#### scheduler.router.js
 * PRIME_STAFF_EMAIL should be updated with the e-mail of the account that user email will generated and sent to.
-8. NPM Run Server
-9. NPM Run Client
+5. NPM Run Server
+6. NPM Run Client
 
 ## Authors
 
