@@ -9,7 +9,7 @@ const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/github.strategy');
 
 // Route includes
-const userRouter = require('./routes/user.router');
+
 const challengeRouter = require('./routes/challenge.router');
 const authRouter = require('./routes/auth.router.js');
 const dashboardRouter = require('./routes/dashboard.router');
@@ -30,7 +30,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 /* Routes */
-app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/challenge', challengeRouter);
 app.use('/api/dashboard', dashboardRouter);
@@ -44,7 +43,10 @@ app.use(express.static('build'));
 // App Set //
 const PORT = process.env.PORT || 5000;
 
+console.log(new Date());
+
+
 /** Listen * */
 app.listen(PORT, () => {
-  console.log(`Listening on port: ${PORT}`);
+  console.log(`Listening *** on port: ${PORT}`);
 });

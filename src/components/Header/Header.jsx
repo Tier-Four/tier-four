@@ -51,10 +51,10 @@ class Header extends Component {
                     <Button color="secondary" onClick={this.logout}>Log out</Button>
                 )
             } else {
-                return (<Button color="secondary" href="http://localhost:5000/api/auth/login">Log In</Button>);
+                return (<Button color="secondary" href="/api/auth/login">Log In</Button>);
             }
         } catch (error) {
-            return (<Button color="secondary" href="http://localhost:5000/api/auth/login">Log In</Button>);
+            return (<Button color="secondary" href="/api/auth/login">Log In</Button>);
         }
     }
 
