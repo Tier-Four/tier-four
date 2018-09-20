@@ -90,9 +90,9 @@ router.get('/login', passport.authenticate('github', { failureRedirect: '/login'
   
 
 router.get('/github/callback', 
-  passport.authenticate('github', { failureRedirect: 'https://enigmatic-savannah-58789.herokuapp.com/#/home' }),
+  passport.authenticate('github', { failureRedirect: 'https://tier4.herokuapp.com/#/home' }),
   function(req, res) {
-    res.redirect('https://enigmatic-savannah-58789.herokuapp.com/#/home');
+    res.redirect('https://tier4.herokuapp.com/#/home');
   });
 
 router.get('/user', (req, res) => {

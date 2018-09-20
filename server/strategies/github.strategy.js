@@ -27,7 +27,7 @@ const CLIENT_SECRET = '9135def1c599d961cab8e9f6474796488f534b5e';
 passport.use( new Strategy({
     clientID: CLIENT_ID,
     clientSecret: CLIENT_SECRET,
-    callbackURL: 'https://enigmatic-savannah-58789.herokuapp.com/api/auth/github/callback'
+    callbackURL: 'https://tier4.herokuapp.com/api/auth/github/callback'
   },
   function(token, tokenSecret, profile, cb) {
     // In this example, the user's Twitter profile is supplied as the user
