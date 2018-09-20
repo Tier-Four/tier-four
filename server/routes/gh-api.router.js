@@ -6,7 +6,7 @@ const rp = require('request-promise')
 const cron = require('node-cron');
 
 
-
+const GITHUB_API_AUTHORIZATION_TOKEN = '' //REPLACE ME
 
 let listOfUsers = []
 let challengeDate = '01-01-2018'
@@ -77,7 +77,7 @@ function callApi(user) {
      //loop through the userlist we just got from postgres and generate an api call using each users information.
         const requestOptions = {
             uri: `https://api.github.com/search/commits?q=committer:${user.github}+committer-date:${todaysDate}&sort=committer-date&per_page=1`,
-            headers: { "User-Agent": user.github, Accept: 'application/vnd.github.cloak-preview+json', Authorization: 'GITHUB_API_AUTHORIZATION_TOKEN' },
+            headers: { "User-Agent": user.github, Accept: 'application/vnd.github.cloak-preview+json', Authorization: GITHUB_API_AUTHORIZATION_TOKEN },
             method: 'GET',
             json: true
         }

@@ -5,13 +5,16 @@ const { rejectNonAdmin } = require('../modules/admin-authentication');
 const router = express.Router();
 const nodemailer = require('nodemailer')
 
+const NODEMAILER_EMAIL = '' //REPLACE ME
+const NODEMAILER_EMAIL = '' //REPLACE ME
+
 let transporter = nodemailer.createTransport({
     service: 'gmail',
     port: 465,
     secure: true,
     auth: {
-        user: 'NODEMAILER_EMAIL',
-        pass: 'NODEMAILER_PASSWORD'
+        user: NODEMAILER_EMAIL,
+        pass: NODEMAILER_PASSWORD
     },
     // for handling request from local host 
     tls: {
