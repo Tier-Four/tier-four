@@ -6,7 +6,7 @@ const router = express.Router();
 const nodemailer = require('nodemailer')
 
 const NODEMAILER_EMAIL = '' //REPLACE ME
-const NODEMAILER_EMAIL = '' //REPLACE ME
+const NODEMAILER_PASSWORD = '' //REPLACE ME
 
 let transporter = nodemailer.createTransport({
     service: 'gmail',
