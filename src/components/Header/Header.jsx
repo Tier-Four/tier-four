@@ -8,8 +8,6 @@ import { Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import NewNav from '../NewNav/NewNav';
 
-
-const HomeLink = props => <Link to="/home" {...props} />
 const DashLink = props => <Link to="/dashboard" {...props} />
 const AdminLink = props => <Link to="/admin" {...props} />
 
@@ -27,7 +25,6 @@ const styles = theme => ({
     logout: {
         marginTop: 10,
         marginLeft: 800,
-       
     },
     gradiant: {
         backgroundImage: 'linear-gradient(#07AA9E, #222222)',
@@ -48,8 +45,6 @@ class Header extends Component {
     }
 
     logInLogOut = () => {
-        let { classes } = this.props
-
         try {
             if (this.props.user.github) {
                 return (
@@ -97,9 +92,7 @@ class Header extends Component {
     }
 
     render() {
-
         let { classes } = this.props
-
         return (
             <div className={classes.gradiant}>
                 <div className={classes.header}>

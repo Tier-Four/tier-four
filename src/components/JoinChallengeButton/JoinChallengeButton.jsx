@@ -21,12 +21,6 @@ const styles = {
 }
 
 class JoinChallengeButton extends Component {
-
-    constructor(props) {
-        super(props);
-    }
-
-
     componentDidMount() {
         this.props.dispatch(fetchStartDate());
         this.props.dispatch({ type: CHALLENGE_ACTIONS.CHECK_FOR_UPCOMING_CHALLENGE });

@@ -6,8 +6,6 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import LoginPage from './components/LoginPage/LoginPage';
-import RegisterPage from './components/RegisterPage/RegisterPage';
 import HomeView from './components/HomeView/HomeView';
 import DashboardView from './components/DashboardView/DashboardView';
 import AdminView from './components/AdminView/AdminView';
@@ -37,14 +35,6 @@ const App = () => (
     <Router>
       <Switch>
         <Redirect exact from="/" to="/home" />
-        <Route
-          path="/login"
-          component={LoginPage}
-        />
-        <Route
-          path="/register"
-          component={RegisterPage}
-        />
         <Route
           path="/admin"
           component={AdminView}

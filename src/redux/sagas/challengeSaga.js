@@ -5,7 +5,6 @@ import axios from 'axios';
 function* fetchPastChallenges() {
     try {
         const pastChallenges = yield call(axios.get, `/api/challenge/fetch-past`);
-        console.log('########PAST CHALLENGES########: ', pastChallenges);
         yield dispatch({
             type: CHALLENGE_ACTIONS.SET_PAST_CHALLENGES,
             payload: pastChallenges.data
@@ -61,7 +60,6 @@ function* fetchUserDataCurrentChallenge() {
 function* checkForUpcomingChallenge() {
     try {
         const upcomingChallenge = yield call(axios.get, '/api/challenge/futureChallenge');
-        // console.log(currentChallenge);
         yield dispatch({
             type: CHALLENGE_ACTIONS.SET_UPCOMING_CHALLENGE,
             payload: upcomingChallenge.data
@@ -74,7 +72,6 @@ function* checkForUpcomingChallenge() {
 function* checkUserInUpcomingChallenge() {
     try {
         const userInUpcomingChallenge = yield call(axios.get, '/api/challenge/futureChallenge/joined');
-        // console.log(currentChallenge);
         yield dispatch({
             type: CHALLENGE_ACTIONS.SET_USER_IN_UPCOMING_CHALLENGE,
             payload: userInUpcomingChallenge.data

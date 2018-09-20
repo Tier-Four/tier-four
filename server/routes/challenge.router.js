@@ -97,22 +97,16 @@ router.post('/newChallenge', rejectUnauthenticated, rejectNonAdmin, (req, res) =
     ];
     pool.query(queryText, queryValues)
         .then(() => {
-            
-
             pool.query(`SELECT "email" FROM "users" WHERE "queued_for_next_challenge" = true;`)
                 .then((response) => {
-
                     //send them to the mailList array
-
                     //adjust email content
-
                     let mailList = [];
                     response.rows.forEach(user => {
                         mailList.push(user.email)
                     })
-
-
-                    const output = `<p>We have a new challenge available for you to join! Head over to the Tier Four app to join and compete!</p>`;
+                    const output = `<p>We have a new challenge available for you to join! 
+                        Head over to the Tier Four app to join and compete!</p>`;
 
                     // setup email data with unicode symbols
                     let mailOptions = {
@@ -205,7 +199,6 @@ router.post('/join', rejectUnauthenticated, (req, res) => {
     })
 
 })
-
 // END - Join Challenge Button
 
 module.exports = router;
