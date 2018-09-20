@@ -5,6 +5,11 @@ const cron = require('node-cron')
 const pool = require('../modules/pool');
 const rp = require('request-promise')
 
+const GITHUB_API_AUTHORIZATION_TOKEN = '' //REPLACE ME
+const NODEMAILER_EMAIL = '' //REPLACE ME
+const NODEMAILER_PASSWORD = '' //REPLACE ME
+const PRIME_STAFF_EMAIL = '' //REPLACE ME
+
 let currentDate = new Date();
 currentDate = JSON.stringify(currentDate)
 currentDate = currentDate.substring(1, 11)
@@ -21,8 +26,8 @@ let transporter = nodemailer.createTransport({
     port: 465,
     secure: true,
     auth: {
-        user: 'NODEMAILER_EMAIL',
-        pass: 'NODEMAILER_PASSWORD'
+        user: NODEMAILER_EMAIL,
+        pass: NODEMAILER_PASSWORD
     },
     // for handling request from local host 
     tls: {
@@ -49,7 +54,7 @@ function callApi(user) {
     const requestPromises = [] //creates an array of requests we are going to send to the api.
     const requestOptions = {
         uri: `https://api.github.com/search/commits?q=committer:${user.github}+committer-date:${currentDate}&sort=committer-date&per_page=1`,
-        headers: { "User-Agent": user.github, Accept: 'application/vnd.github.cloak-preview+json', Authorization: 'GITHUB_API_AUTHORIZATION_TOKEN' },
+        headers: { "User-Agent": user.github, Accept: 'application/vnd.github.cloak-preview+json', Authorization: GITHUB_API_AUTHORIZATION_TOKEN },
         method: 'GET',
         json: true
     }
@@ -163,7 +168,7 @@ function weeklyUpdates() {
             // setup email data with unicode symbols
             let mailOptions = {
                 from: 'Tier Four App', // sender address
-                to: 'PRIME_STAFF_EMAIL', // INSERT careers@primeacademy.io HERE
+                to: PRIME_STAFF_EMAIL, // INSERT careers@primeacademy.io HERE
                 subject: 'Weekly Alumni Feedback', // Subject line
                 text: '', // plain text body
                 html: output // html body
