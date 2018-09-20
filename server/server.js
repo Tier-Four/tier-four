@@ -30,7 +30,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 /* Routes */
-app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/challenge', challengeRouter);
 app.use('/api/dashboard', dashboardRouter);
@@ -44,7 +43,10 @@ app.use(express.static('build'));
 // App Set //
 const PORT = process.env.PORT || 5000;
 
+console.log(new Date());
+
+
 /** Listen * */
 app.listen(PORT, () => {
-  console.log(`Listening on port: ${PORT}`);
+  console.log(`Listening *** on port: ${PORT}`);
 });
