@@ -13,8 +13,8 @@ passport.serializeUser(function(user, cb) {
   });
 
 //these are from the GitHub OAuth application
-const CLIENT_ID = '69f62cd5606f940c16e1';
-const CLIENT_SECRET = 'bfa6feba4bf473840752b9d1c49bf61cdd90d5e7';
+const CLIENT_ID = '1d14666b64e768538a8b';
+const CLIENT_SECRET = '9135def1c599d961cab8e9f6474796488f534b5e';
 
 
 passport.use( new Strategy({
