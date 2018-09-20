@@ -47,7 +47,7 @@ const styles = {
 
 //user, longestStreak, commitRate being passed through the redux state from github.  
 const mapStateToProps = state => ({
-    user: state.user.user,
+    user: state.user.user || '',
     isLoading: state.user.isLoading,
     commitRate: state.userStats.commit_percentage,
     longestStreak: state.userStats.longest_streak,
@@ -117,7 +117,7 @@ class DashboardView extends Component {
     //if unverified, redirecting to home page
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-        if (!this.props.user && this.props.user === null) {
+        if (!this.props.user && this.props.user === '') {
             this.props.history.push('home');
         }
         this.props.dispatch(fetchStats());
@@ -126,7 +126,7 @@ class DashboardView extends Component {
     //handling same functionality as above, but for page update
     //setting state for the snackbar/toasts on update
     componentDidUpdate(prevProps) {
-        if (!this.props.isLoading && this.props.user.github === null) {
+        if (!this.props.isLoading && this.props.user.github === '') {
             this.props.history.push('home');
         }
         if (this.props.emailSnackbar !== prevProps.emailSnackbar) {
