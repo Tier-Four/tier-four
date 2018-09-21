@@ -43,12 +43,16 @@ function dailyEmail() {
 
 
             userList = response.rows //create a userList which will be used to search the github api to see if the user has committed today.
-
+            
+            currentDate = new Date();
+            currentDate = JSON.stringify(currentDate)
+            currentDate = currentDate.substring(1, 11)
 
             callApi(userList.shift())
 
         })
 }
+
 
 function callApi(user) {
     const requestPromises = [] //creates an array of requests we are going to send to the api.
@@ -156,13 +160,13 @@ function weeklyUpdates() {
             //adjust email content
             let output = '';
 
-            response.rows.forEach(user=>{
+            response.rows.forEach(user => {
                 output += `<p>name: ${user.name} email: ${user.email} applied: ${user.applied} learned: ${user.learned} built: ${user.built} followed up: ${user.followed_up} networking: ${user.events_networking}     </p>`
             })
 
-            
-            console.log('this is the output',output);
-            
+
+            console.log('this is the output', output);
+
             // const output = `<p>${JSON.stringify(response.rows)}</p>`; //temporary
 
             // setup email data with unicode symbols
