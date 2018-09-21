@@ -42,6 +42,7 @@ The purpose of Tier 4 is to encourage and create structure for Prime graduates (
 - [ ] Ability for users to share what they are working on
 - [ ] Added incentives for users
 - [ ] Make application mobile friendly
+- [ ] Randomizing the leaderboard for user who are tied
 
 ## Deployment
 
