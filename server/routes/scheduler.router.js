@@ -5,6 +5,11 @@ const cron = require('node-cron')
 const pool = require('../modules/pool');
 const rp = require('request-promise')
 
+const GITHUB_API_AUTHORIZATION_TOKEN = '' //REPLACE ME
+const NODEMAILER_EMAIL = '' //REPLACE ME
+const NODEMAILER_PASSWORD = '' //REPLACE ME
+const PRIME_STAFF_EMAIL = '' //REPLACE ME
+
 let currentDate = new Date();
 currentDate = JSON.stringify(currentDate)
 currentDate = currentDate.substring(1, 11)
@@ -21,8 +26,8 @@ let transporter = nodemailer.createTransport({
     port: 465,
     secure: true,
     auth: {
-        user: 'prime.tierfour@gmail.com',
-        pass: 'jefftylermattmaiyer'
+        user: NODEMAILER_EMAIL,
+        pass: NODEMAILER_PASSWORD
     },
     // for handling request from local host 
     tls: {
@@ -38,18 +43,22 @@ function dailyEmail() {
 
 
             userList = response.rows //create a userList which will be used to search the github api to see if the user has committed today.
-
+            
+            currentDate = new Date();
+            currentDate = JSON.stringify(currentDate)
+            currentDate = currentDate.substring(1, 11)
 
             callApi(userList.shift())
 
         })
 }
 
+
 function callApi(user) {
     const requestPromises = [] //creates an array of requests we are going to send to the api.
     const requestOptions = {
         uri: `https://api.github.com/search/commits?q=committer:${user.github}+committer-date:${currentDate}&sort=committer-date&per_page=1`,
-        headers: { "User-Agent": 'reverended', Accept: 'application/vnd.github.cloak-preview+json', Authorization: 'token  23982af669baa75e29e52bbd5a45594c65b7f7b2' },
+        headers: { "User-Agent": user.github, Accept: 'application/vnd.github.cloak-preview+json', Authorization: GITHUB_API_AUTHORIZATION_TOKEN },
         method: 'GET',
         json: true
     }
@@ -151,19 +160,19 @@ function weeklyUpdates() {
             //adjust email content
             let output = '';
 
-            response.rows.forEach(user=>{
+            response.rows.forEach(user => {
                 output += `<p>name: ${user.name} email: ${user.email} applied: ${user.applied} learned: ${user.learned} built: ${user.built} followed up: ${user.followed_up} networking: ${user.events_networking}     </p>`
             })
 
-            
-            console.log('this is the output',output);
-            
+
+            console.log('this is the output', output);
+
             // const output = `<p>${JSON.stringify(response.rows)}</p>`; //temporary
 
             // setup email data with unicode symbols
             let mailOptions = {
                 from: 'Tier Four App', // sender address
-                to: 'eddywilkins34@gmail.com', // INSERT careers@primeacademy.io HERE
+                to: PRIME_STAFF_EMAIL, // INSERT careers@primeacademy.io HERE
                 subject: 'Weekly Alumni Feedback', // Subject line
                 text: '', // plain text body
                 html: output // html body
