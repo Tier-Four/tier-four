@@ -10,8 +10,8 @@ let transporter = nodemailer.createTransport({
     port: 465,
     secure: true,
     auth: {
-        user: 'prime.tierfour@gmail.com',
-        pass: 'jefftylermattmaiyer'
+        user: 'NODEMAILER_EMAIL',
+        pass: 'NODEMAILER_PASSWORD'
     },
     // for handling request from local host 
     tls: {
