@@ -6,7 +6,7 @@ const rp = require('request-promise')
 const cron = require('node-cron');
 
 
-const GITHUB_API_AUTHORIZATION_TOKEN = '' //REPLACE ME
+const GITHUB_API_AUTHORIZATION_TOKEN = process.env.GITHUB_API_AUTHORIZATION_TOKEN
 
 let listOfUsers = []
 let challengeDate = '01-01-2018'
@@ -25,6 +25,10 @@ todaysDate = date.substring(1, 11)
 
 cron.schedule('0 0 0 * * *', function () {
     console.log('time to retrieve data...');
+    todaysDate = new Date();
+    todaysDate.setDate(todaysDate.getDate() - 1)
+    todaysDate = JSON.stringify(todaysDate)
+    todaysDate = date.substring(1, 11)
     getData();
 });
 //run getData() once every 20 seconds, will be changed to once a day at midnight.
@@ -40,7 +44,7 @@ function getData() {
                 challengeDateString = JSON.stringify(challengeDate)
                 challengeDateString = challengeDateString.substring(1, 11)
 
-                let date1 = new Date(challengeDateString); 
+                let date1 = new Date(challengeDateString);
                 let date2 = new Date(todaysDate);
                 let timeDiff = Math.abs(date2.getTime() - date1.getTime());
                 let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
@@ -59,6 +63,8 @@ function getData() {
                 JOIN "user_challenge" ON "users"."id" = "user_challenge"."user_id"
                 WHERE "user_challenge"."challenge_id" = $1;`, [challengeID]) //retrieves the github, user_id, and calendar for users enrolled in the current challenge, using the challenge id just retrieved.
                     .then((response) => {
+                        
+                        
                         listOfUsers = response.rows
                         callApi(listOfUsers.shift())
                     })
@@ -74,21 +80,21 @@ function getData() {
 
 function callApi(user) {
     const requestPromises = [] //create an array to store all the requests we will send to the github api
-     //loop through the userlist we just got from postgres and generate an api call using each users information.
-        const requestOptions = {
-            uri: `https://api.github.com/search/commits?q=committer:${user.github}+committer-date:${todaysDate}&sort=committer-date&per_page=1`,
-            headers: { "User-Agent": user.github, Accept: 'application/vnd.github.cloak-preview+json', Authorization: GITHUB_API_AUTHORIZATION_TOKEN },
-            method: 'GET',
-            json: true
-        }
-        requestPromises.push(rp(requestOptions)); //create a promise for each api request
+    //loop through the userlist we just got from postgres and generate an api call using each users information.
+    const requestOptions = {
+        uri: `https://api.github.com/search/commits?q=committer:${user.github}+committer-date:${todaysDate}&sort=committer-date&per_page=1`,
+        headers: { "User-Agent": user.github, Accept: 'application/vnd.github.cloak-preview+json', Authorization: `token ${GITHUB_API_AUTHORIZATION_TOKEN}` },
+        method: 'GET',
+        json: true
+    }
+    requestPromises.push(rp(requestOptions)); //create a promise for each api request
     Promise.all(requestPromises)
-    .then((data) => {
-        sortAndSendData(data, user)
-        if (listOfUsers.length !== 0) {
-            setTimeout(()=>callApi(listOfUsers.shift()), 2000)
-        }
-    })
+        .then((data) => {
+            sortAndSendData(data, user)
+            if (listOfUsers.length !== 0) {
+                setTimeout(() => callApi(listOfUsers.shift()), 2000)
+            }
+        })
 }
 
 async function sortAndSendData(tempData, user) { //tempData is an array of the data(sorted by user) that we got from the api. its indexes correspond to the userList array. this is important.
@@ -112,7 +118,7 @@ async function sortAndSendData(tempData, user) { //tempData is an array of the d
 
     setActiveUser(calendar, tempUserName, diffDays)
     //this is where everything has finished ok
-
+    // console.log('success');
     pool.query(`UPDATE "user_challenge" SET "longest_streak" = $1, "commit_percentage" = $2, "calendar" = $3 WHERE "user_id" = $4`,
         [data.longestStreak, data.commitPercent, calendar, data.userID])
         .then((response) => { //sends the data we just generated to the user_challenge table in postgres. will update existing entries for users. user entries are generated upon joining a challenge.
@@ -125,7 +131,7 @@ async function sortAndSendData(tempData, user) { //tempData is an array of the d
 }
 
 function setActiveUser(calendar, userInfo, diffDays) {
-    tempCalendar = calendar.slice(0, diffDays+1)
+    tempCalendar = calendar.slice(0, diffDays + 1)
     tempCalendar = tempCalendar.reverse();
 
     if (tempCalendar[0] === false && tempCalendar[1] === false && tempCalendar[2] === false && tempCalendar[3] === false && tempCalendar[4] === false) {
@@ -196,7 +202,7 @@ function getStreak(data) {
 }
 
 function getPercent(data, diffDays) {
-    let newData = data.slice(0, diffDays+1) //grabs a sub-array that only includes days of the challenge which have already passed.
+    let newData = data.slice(0, diffDays + 1) //grabs a sub-array that only includes days of the challenge which have already passed.
     let commitCount = 0;
     for (let i = 0; i < newData.length; i++) {
         if (newData[i]) {

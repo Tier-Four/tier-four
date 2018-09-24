@@ -7,9 +7,9 @@ router.get('/login', passport.authenticate('github', { failureRedirect: '/login'
   
 
 router.get('/github/callback', 
-  passport.authenticate('github', { failureRedirect: 'https://tier4.herokuapp.com/#/home' }),
+  passport.authenticate('github', { failureRedirect: process.env.APP_HOMEPAGE_URL }),
   function(req, res) {
-    res.redirect('https://tier4.herokuapp.com/#/home');
+    res.redirect(process.env.APP_HOMEPAGE_URL);
   });
 
 router.get('/user', (req, res) => {

@@ -5,10 +5,10 @@ const cron = require('node-cron')
 const pool = require('../modules/pool');
 const rp = require('request-promise')
 
-const GITHUB_API_AUTHORIZATION_TOKEN = '' //REPLACE ME
-const NODEMAILER_EMAIL = '' //REPLACE ME
-const NODEMAILER_PASSWORD = '' //REPLACE ME
-const PRIME_STAFF_EMAIL = '' //REPLACE ME
+const GITHUB_API_AUTHORIZATION_TOKEN = process.env.GITHUB_API_AUTHORIZATION_TOKEN
+const NODEMAILER_EMAIL = process.env.NODEMAILER_EMAIL
+const NODEMAILER_PASSWORD = process.env.NODEMAILER_PASSWORD
+const PRIME_STAFF_EMAIL = process.env.PRIME_STAFF_EMAIL
 
 let currentDate = new Date();
 currentDate = JSON.stringify(currentDate)
@@ -43,12 +43,16 @@ function dailyEmail() {
 
 
             userList = response.rows //create a userList which will be used to search the github api to see if the user has committed today.
-
+            
+            currentDate = new Date();
+            currentDate = JSON.stringify(currentDate)
+            currentDate = currentDate.substring(1, 11)
 
             callApi(userList.shift())
 
         })
 }
+
 
 function callApi(user) {
     const requestPromises = [] //creates an array of requests we are going to send to the api.
@@ -156,13 +160,13 @@ function weeklyUpdates() {
             //adjust email content
             let output = '';
 
-            response.rows.forEach(user=>{
+            response.rows.forEach(user => {
                 output += `<p>name: ${user.name} email: ${user.email} applied: ${user.applied} learned: ${user.learned} built: ${user.built} followed up: ${user.followed_up} networking: ${user.events_networking}     </p>`
             })
 
-            
-            console.log('this is the output',output);
-            
+
+            console.log('this is the output', output);
+
             // const output = `<p>${JSON.stringify(response.rows)}</p>`; //temporary
 
             // setup email data with unicode symbols

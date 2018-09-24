@@ -13,14 +13,14 @@ passport.serializeUser(function(user, cb) {
   });
 
 //these are from the GitHub OAuth application
-const CLIENT_ID = '69f62cd5606f940c16e1';
-const CLIENT_SECRET = 'bfa6feba4bf473840752b9d1c49bf61cdd90d5e7';
+const CLIENT_ID = process.env.GITHUB_CLIENT_ID;
+const CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
 
 
 passport.use( new Strategy({
     clientID: CLIENT_ID,
     clientSecret: CLIENT_SECRET,
-    callbackURL: 'https://tier4.herokuapp.com/api/auth/github/callback' //this is set-up in the OAuth App on GitHub
+    callbackURL: process.env.GITHUB_OAUTH_CALLBACK_URL //this is set-up in the OAuth App on GitHub
   },
   function(token, tokenSecret, profile, cb) {
     //Do we have a user matching this in our Database?
