@@ -5,10 +5,10 @@ const cron = require('node-cron')
 const pool = require('../modules/pool');
 const rp = require('request-promise')
 
-const GITHUB_API_AUTHORIZATION_TOKEN = '' //REPLACE ME
-const NODEMAILER_EMAIL = '' //REPLACE ME
-const NODEMAILER_PASSWORD = '' //REPLACE ME
-const PRIME_STAFF_EMAIL = '' //REPLACE ME
+const GITHUB_API_AUTHORIZATION_TOKEN = process.env.GITHUB_API_AUTHORIZATION_TOKEN
+const NODEMAILER_EMAIL = process.env.NODEMAILER_EMAIL
+const NODEMAILER_PASSWORD = process.env.NODEMAILER_PASSWORD
+const PRIME_STAFF_EMAIL = process.env.PRIME_STAFF_EMAIL
 
 let currentDate = new Date();
 currentDate = JSON.stringify(currentDate)
