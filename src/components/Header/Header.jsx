@@ -23,7 +23,6 @@ const styles = theme => ({
         marginLeft: 20,
     },
     logout: {
-        // marginTop: 10,
         marginRight: 50,
         justifySelf: 'end',
         right: 0,
