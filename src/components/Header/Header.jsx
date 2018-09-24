@@ -14,7 +14,7 @@ const AdminLink = props => <Link to="/admin" {...props} />
 const styles = theme => ({
 
     header: {
-        display: 'flex',
+        display: 'grid',
         height: 100,
         margin: 0,
     },
@@ -23,8 +23,10 @@ const styles = theme => ({
         marginLeft: 20,
     },
     logout: {
-        marginTop: 10,
-        marginLeft: 800,
+        // marginTop: 10,
+        marginRight: 50,
+        justifySelf: 'end',
+        right: 0,
     },
     gradiant: {
         backgroundImage: 'linear-gradient(#07AA9E, #222222)',
@@ -96,7 +98,7 @@ class Header extends Component {
         return (
             <div className={classes.gradiant}>
                 <div className={classes.header}>
-                    <img src="https://dewiskbohv5c1.cloudfront.net/assets/logo-prime-horizontal-6909d23113b83bd59bf681f26f940f97.svg" alt="" height="50%" width="auto" className={classes.logo} />
+                    <img src="https://dewiskbohv5c1.cloudfront.net/assets/logo-prime-horizontal-6909d23113b83bd59bf681f26f940f97.svg" alt="" height="150%" width="auto" className={classes.logo} />
                     <div className={classes.logout}>
                         {this.logInLogOut()}
                     </div>
