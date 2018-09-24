@@ -23,9 +23,10 @@ date = JSON.stringify(date)
 todaysDate = date.substring(1, 11)
 //calculate todays date so that we only get todays commits in getData()
 
-cron.schedule('0 0 23 * * *', function () {
+cron.schedule('0 0 0 * * *', function () {
     console.log('time to retrieve data...');
     todaysDate = new Date();
+    todaysDate.setDate(todaysDate.getDate() - 1)
     todaysDate = JSON.stringify(todaysDate)
     todaysDate = date.substring(1, 11)
     getData();
