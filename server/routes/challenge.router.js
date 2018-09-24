@@ -154,7 +154,7 @@ router.get('/date', (req, res) => {
 //START - Join Challenge Button
 router.get('/futureChallenge', rejectUnauthenticated, (req, res) => {
     pool.query(`SELECT * FROM "challenges"
-        WHERE challenges.date > current_date
+        WHERE challenges.date >= current_date
         ORDER BY "date" DESC
         LIMIT 1;`)
         .then((result) => {
@@ -169,7 +169,7 @@ router.get('/futureChallenge/joined', rejectUnauthenticated, (req, res) => {
     pool.query(`SELECT * FROM "challenges"
         JOIN user_challenge on challenges.id = user_challenge.challenge_id
         JOIN users on users.id = user_challenge.user_id
-        WHERE challenges.date > current_date
+        WHERE challenges.date >= current_date
         ORDER BY "date" DESC
         LIMIT 1;`)
         .then((result) => {
@@ -182,7 +182,7 @@ router.get('/futureChallenge/joined', rejectUnauthenticated, (req, res) => {
 
 router.post('/join', rejectUnauthenticated, (req, res) => {
     pool.query(`SELECT * FROM "challenges"
-        WHERE challenges.date > current_date
+        WHERE challenges.date >= current_date
         ORDER BY "date" DESC
         LIMIT 1;`
     ).then(response => {
