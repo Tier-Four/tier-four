@@ -6,7 +6,7 @@ const rp = require('request-promise')
 const cron = require('node-cron');
 
 
-const GITHUB_API_AUTHORIZATION_TOKEN = '' //REPLACE ME
+const GITHUB_API_AUTHORIZATION_TOKEN = process.env.GITHUB_API_AUTHORIZATION_TOKEN
 
 let listOfUsers = []
 let challengeDate = '01-01-2018'
