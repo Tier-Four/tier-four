@@ -182,7 +182,7 @@ router.get('/futureChallenge/joined', rejectUnauthenticated, (req, res) => {
 
 router.post('/join', rejectUnauthenticated, (req, res) => {
     pool.query(`SELECT * FROM "challenges"
-        WHERE challenges.date > current_date
+        WHERE challenges.date >= current_date
         ORDER BY "date" DESC
         LIMIT 1;`
     ).then(response => {
